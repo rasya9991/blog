@@ -1,0 +1,77 @@
+.container{
+    width: 350px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.28);
+
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    padding: 15px;
+
+    border-radius: 5px;
+}
+.submitButton{
+    cursor: pointer;
+    color: white;
+    background-color: #1890FF;
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+
+    transition: .1s ease-in;
+}
+.submitButton:active{
+    transform: scale(1.02);
+}
+.form{
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+    width: 100%;
+}
+.errorEmail{
+    border: 1px solid #de4343;
+}
+.errorPassword{
+    border: 1px solid #de4343;
+}
+.inputLabel{
+    display: flex;
+    flex-direction: column;
+    color: grey;
+    gap: 3px;
+}
+.inputError{
+    font-size: 14px;
+    color: #de4343;
+}
+.field{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.title{
+    color: grey;
+    margin-left: auto;
+    margin-right: auto;
+}
+.submitButton:disabled{
+    cursor: unset;
+    opacity: .5;
+
+}
+.checkBoxAgree{
+    display: flex;
+    gap: 5px;
+}
+input{
+    font-size: 15px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #D9D9D9;
+}

@@ -1,0 +1,21 @@
+html {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    background-color: #EBEEF3;
+    font-family: "Corbel";
+}
+.app {
+    display: flex;
+    flex-direction: column;
+}
+

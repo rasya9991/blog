@@ -1,0 +1,24 @@
+.signUp{
+    color: #3dbd3d;
+    text-decoration: none;
+}
+.signUp:visited{
+
+}
+.headerAuthorization {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+
+    font-size: 20px;
+}
+.signIn{
+    color: grey;
+    text-decoration: none;
+}
+.signUpBtn{
+    padding: 5px;
+    border: 1px solid #3dbd3d;
+    border-radius: 5px;
+}

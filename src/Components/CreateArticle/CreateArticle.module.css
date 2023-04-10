@@ -1,0 +1,83 @@
+.createArticleContainer{
+    width: 600px ;
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: white;
+
+    margin-top: 40px;
+
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    gap: 20px;
+    padding: 20px;
+}
+.title{
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    color: grey;
+}
+.submitBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    padding: 0;
+    background-color: #1890FF;
+    border-radius: 5px;
+    color: white;
+}
+.inputField{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+}
+.inputLabel{
+    display: flex;
+    flex-direction: column;
+}
+.textAreaLabel{
+    resize: vertical;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.deleteButton{
+    border: 0;
+    background-color: #de4343;
+    color: white;
+}
+.tagInput{
+    display: flex;
+    gap: 5px;
+
+}
+.submitBtn:disabled{
+    opacity: .5;
+}
+.addTagBtn{
+    border: 0;
+    background-color: #3dbd3d;
+    color: white;
+    padding: 5px 8px;
+
+    transition: .1s linear;
+
+    border-radius: 4px;
+}
+.addTagBtn:active{
+    transform: scale(1.02);
+}
+.error{
+    color: #de4343;
+}
