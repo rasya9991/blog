@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {ISignInForm} from "../../Models/ISignInForm";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {signInFunc} from "../../Services/signIn";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const SignIn = () => {
