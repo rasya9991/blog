@@ -68,10 +68,28 @@
 .checkBoxAgree{
     display: flex;
     gap: 5px;
+    color: #595959;
 }
-input{
-    font-size: 15px;
-    height: 30px;
-    padding: 5px;
-    border: 1px solid #D9D9D9;
+.haveAcc{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.haveAccText{
+    opacity: 0.5;
+}
+.haveAccLink{
+    color: #1890FF;
+    text-decoration: none;
+}
+.checkBoxAgreeCheck{
+
+}
+.checkBoxAgreeCheck:checked{
+    background-color: #1890FF;
+    color: white;
+}
+input.checkBoxAgreeCheck{
+    border: 0;
 }

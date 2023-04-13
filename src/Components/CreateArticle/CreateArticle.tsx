@@ -30,6 +30,7 @@ const CreateArticle = () => {
     const onSubmit:SubmitHandler<ICreateArticleForm> = (data) => {
         data.token = token
         dispatch(createArticle(data))
+        navigate('/')
         reset()
         console.log(data)
     }

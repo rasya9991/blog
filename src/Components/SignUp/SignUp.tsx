@@ -4,7 +4,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {ISignUpForm} from "../../Models/ISignUpForm";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {signUpFunc} from "../../Services/signUpFunc";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors,isValid},reset,watch} = useForm<ISignUpForm>({mode:'onChange'});
     const {isAuth} = useAppSelector(state => state.UserReducer)
@@ -23,7 +23,7 @@ const SignUp = () => {
     },[isAuth])
     return (
         <div className={styles.container}>
-            <h2 className={styles.title}>Sign Up</h2>
+            <h2 className={styles.title}>Create account</h2>
 
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 
@@ -94,14 +94,18 @@ const SignUp = () => {
                     </div>
                 </div>
                 <label className={styles.checkBoxAgree}>
-                    <input type="checkbox" {...register('isAgree',{
+                    <input className={styles.checkBoxAgreeCheck} type="checkbox" {...register('isAgree',{
                         required:true
                     })}/>
                     I agree to the processing of my personal information
                 </label>
 
-                <input type="submit" className={styles.submitButton} value={'Login'} disabled={!isValid}/>
+                <input type="submit" className={styles.submitButton} value={'Create'} disabled={!isValid}/>
             </form>
+            <div className={styles.haveAcc}>
+                <span className={styles.haveAccText}>Already have an account?</span>
+                <Link to={'/sign-in'} className={styles.haveAccLink}>Sign in</Link>
+            </div>
         </div>
     );
 };

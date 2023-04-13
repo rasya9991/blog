@@ -3,6 +3,7 @@ import {IPost} from "../../Models/IPost";
 import {fetchPosts} from "../../Services/fetchPosts";
 import {LikePost} from "../../Services/likePost";
 import {Dislike} from "../../Services/Dislike";
+import {createArticle} from "../../Services/createArticle";
 
 type PostsState = {
     posts:IPost[]

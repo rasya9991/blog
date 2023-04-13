@@ -19,7 +19,8 @@ export const createArticle = createAsyncThunk(
                 tagList: obj.tagList
             }
             console.log(resObj)
-            await axios.post('https://blog.kata.academy/api/articles',{article:{...resObj}},{headers:{Authorization: `Bearer ${obj.token}`}})
+            const res = await axios.post('https://blog.kata.academy/api/articles',{article:{...resObj}},{headers:{Authorization: `Bearer ${obj.token}`}}).then(r=>r.data)
+            console.log(res ,' 3213131')
         } catch (e) {
             return thunkAPI.rejectWithValue(e)
         }
