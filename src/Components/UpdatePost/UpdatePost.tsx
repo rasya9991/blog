@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
-import styles from './CreateArticle.module.css'
+import styles from './UpdatePost.module.css'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {useNavigate} from "react-router-dom";
 import {SubmitHandler, useFieldArray, useForm} from "react-hook-form";
 import {ICreateArticleForm} from "../../Models/ICreateArticleForm";
-import {createArticle} from "../../Services/createArticle";
-const CreateArticle = () => {
+import {updatePost} from "../../Services/updatePost";
+const UpdatePost = () => {
     const {isAuth} = useAppSelector(state => state.UserReducer)
+    const {tagList,title,description,body,author,slug} = useAppSelector(state => state.SinglePageReducer)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const {register,control, handleSubmit, formState: { errors,isValid},reset,} = useForm<ICreateArticleForm>({mode:"onChange",defaultValues:{
-        tagList:[]
+            tagList:[...tagList]
         }})
     const { fields, append,remove, } = useFieldArray({
         name:'tagList',
@@ -28,24 +29,23 @@ const CreateArticle = () => {
             </li>
         );
     })
-    const {token} = useAppSelector(state => state.UserReducer)
+    const {token,username} = useAppSelector(state => state.UserReducer)
     const onSubmit:SubmitHandler<ICreateArticleForm> = (data) => {
         data.token = token
-        dispatch(createArticle(data))
+        dispatch(updatePost({title:data.title,body:data.body,description:data.description,token:token,slug:slug,tagList:data.tagList}))
         navigate('/')
         reset()
-        console.log(data)
     }
 
     useEffect(()=>{
-        if(!isAuth){
+        if(!isAuth || username !== author.username){
             navigate('/')
         }
     },[isAuth])
     return (
         <div className={styles.createArticleContainer}>
             <div className={styles.title}>
-                <span>Create new article</span>
+                <span>Update article</span>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -56,7 +56,7 @@ const CreateArticle = () => {
                         <input type="text" {...register('title',{
                             required:'Поле обязательное для ввода!',
                             minLength:1
-                        })}/>
+                        })} placeholder={title}/>
                     </label>
                     <div className={styles.inputError}>{errors?.title && <span className={styles.error}>{errors?.title?.message}</span>}</div>
                 </div>
@@ -66,7 +66,7 @@ const CreateArticle = () => {
                         Description
                         <input type="text" {...register('description',{
                             required:'Поле обязательное для ввода!'
-                        })}/>
+                        })} placeholder={description}/>
                     </label>
                     <div className={styles.inputError}>{errors?.description && <span className={styles.error}>{errors?.description?.message}</span>}</div>
                 </div>
@@ -76,18 +76,18 @@ const CreateArticle = () => {
                         Body
                         <textarea className={styles.textAreaLabel} {...register('body',{
                             required:'Поле обязательное для ввода!'
-                        })}></textarea>
+                        })} placeholder={body}></textarea>
                     </label>
                     <div className={styles.inputError}>{errors?.body && <span className={styles.error}>{errors?.body?.message}</span>}</div>
                 </div>
                 {tagsInputs}
                 <button className={styles.addTagBtn} onClick={()=>append('')}>Add tag</button>
                 {fields.length > 0 ? null : <span className={styles.error}>Добавьте минимум 1 тег</span>}
-                <input type="submit" className={styles.submitBtn} value={'create'} disabled={!isValid}/>
+                <input type="submit" className={styles.submitBtn} value={'Update'} disabled={!isValid}/>
             </form>
 
         </div>
     );
 };
 
-export default CreateArticle;
+export default UpdatePost;

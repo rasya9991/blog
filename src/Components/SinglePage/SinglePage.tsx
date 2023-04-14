@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 import styles from './SinglePage.module.css'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {Link,useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {GetSinglePage} from "../../Services/getSinglePage";
 import {nanoid} from "nanoid";
 import {LikePost} from "../../Services/likePost";
 import {Dislike} from "../../Services/Dislike";
+import {DeletePost} from "../../Services/deletePost";
 const SinglePage = () => {
     const dispatch = useAppDispatch()
-    const {isAuth,token} = useAppSelector(state => state.UserReducer)
+    const {isAuth,token,username} = useAppSelector(state => state.UserReducer)
     const {slug,title,description,body,tagList,createdAt,favorited,favoritesCount,author} = useAppSelector(state => state.SinglePageReducer)
     const params = useParams()
     useEffect(()=>{
@@ -19,6 +20,7 @@ const SinglePage = () => {
     const tags = tagList.map(el=>{
         return <div key={nanoid()} className={styles.tag}>{el}</div>
     })
+    const navigate = useNavigate()
     const createData = String(new Date(createdAt.slice(0,10))).split(' ')
     return (
         <div className={styles.post}>
@@ -61,6 +63,14 @@ const SinglePage = () => {
                     <div>
                         <img className={styles.creatorIgm} src={`${author.image}`} alt=""/>
                     </div>
+                    {username === author.username ? <div className={styles.postButtons}>
+                        <button className={styles.editBtn} onClick={()=>{navigate(`/${slug}/update`)}}>Edit</button>
+                        <button className={styles.deleteBtn} onClick={()=>{
+                            dispatch(DeletePost({slug:slug,token:token}))
+                            navigate('/')
+                        }
+                        }>Delete</button>
+                    </div> : null}
                 </div>
             </div>
             <div className={styles.postText}>{description}</div>

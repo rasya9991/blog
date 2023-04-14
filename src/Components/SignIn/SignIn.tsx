@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './SignIn.module.css'
 import {SubmitHandler, useForm} from "react-hook-form";
 import {ISignInForm} from "../../Models/ISignInForm";
@@ -8,15 +8,26 @@ import {useNavigate} from "react-router-dom";
 
 
 const SignIn = () => {
-    const { register, handleSubmit, formState: { errors,isValid},reset} = useForm<ISignInForm>({mode:'onChange'});
+    const { register, handleSubmit, formState: { errors,isValid,isSubmitSuccessful},reset,watch} = useForm<ISignInForm>({mode:'onChange'});
     const dispatch = useAppDispatch()
     const {isAuth} = useAppSelector(state => state.UserReducer)
     const navigate = useNavigate()
+    const loginError = 'Введен непавильный логин или пароль!'
+    const [rejectLogin,setRejectLogin] = useState(false)
+    useEffect(() => {
+        setRejectLogin(isSubmitSuccessful)
+    }, [isSubmitSuccessful])
     useEffect(()=>{
         if(isAuth){
             navigate('/')
         }
     },[isAuth])
+    const passWatch = watch("password")
+    useEffect(()=>{
+        if(passWatch && passWatch.length>0){
+            setRejectLogin(false)
+        }
+    },[passWatch])
     const onSubmit:SubmitHandler<ISignInForm> = async (data) => {
         const signInObj = {...data}
         await dispatch(signInFunc(signInObj))
@@ -54,7 +65,7 @@ const SignIn = () => {
                         {errors?.password && <span>{errors?.password?.message}</span>}
                     </div>
                 </div>
-
+                {rejectLogin ? <span style={{color:"red"}}>{loginError}</span> : null}
                 <input type="submit" value={'sign in'} className={styles.submitButton} disabled={!isValid}/>
             </form>
         </div>

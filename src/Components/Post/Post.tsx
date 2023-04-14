@@ -11,6 +11,7 @@ type PostProps = {
     params:IPost
 }
 const Post:React.FC<PostProps> = (props) => {
+
     const {params} = props
     const tags = params.tagList.map(el=>{
         return <div key={nanoid()} className={styles.tag}>{el}</div>

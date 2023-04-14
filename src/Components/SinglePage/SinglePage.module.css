@@ -49,6 +49,7 @@
 .infoTags{
     display: flex;
     width: 300px;
+    gap: 5px;
     flex-wrap: wrap;
 }
 .mainInfo{
@@ -107,4 +108,33 @@
 }
 .body{
     opacity: 0.75;
+}
+.editBtn{
+    color: white;
+    border: 0;
+    background-color: #3dbd3d;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .1s linear;
+}
+.editBtn:active{
+    transform: scale(1.05);
+}
+.deleteBtn{
+    color: white;
+    border: 0;
+    background-color: #de4343;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .1s linear;
+}
+.deleteBtn:active{
+    transform: scale(1.05);
+}
+.postButtons{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }

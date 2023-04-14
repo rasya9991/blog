@@ -8,6 +8,7 @@ import SignUp from "./Components/SignUp/SignUp";
 import CreateArticle from "./Components/CreateArticle/CreateArticle";
 import SinglePage from "./Components/SinglePage/SinglePage";
 import EditUser from "./Components/EditUser/EditUser";
+import UpdatePost from "./Components/UpdatePost/UpdatePost";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
             <Route path={"/"} element={<Main/>}>
                 <Route index element={<PostLIst/>}/>
                 <Route path={":id"} element={<SinglePage/>}/>
+                <Route path={":id/update"} element={<UpdatePost/>}/>
 
                 <Route path={"sign-up"} element={<SignUp/>}/>
                 <Route path={'edit-user'} element={<EditUser/>}/>
